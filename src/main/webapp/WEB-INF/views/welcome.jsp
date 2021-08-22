@@ -28,6 +28,9 @@
         <h2>Welcome ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Logout</a>
         </h2>
 
+        <a href="${contextPath}/books">Books</a><br>
+        <a href="${contextPath}/authors">Authors</a>
+
     </c:if>
 
 </div>
