@@ -36,6 +36,9 @@
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
 
+    <bean id="bookDaoImpl" class="com.mprog.springapp.dao.BookDaoImpl">
+    </bean>
+
     <tx:annotation-driven/>
 
     <jpa:repositories base-package="com.mprog.springapp.dao"/>
