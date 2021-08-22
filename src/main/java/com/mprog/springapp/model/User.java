@@ -2,6 +2,8 @@ package com.mprog.springapp.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -18,10 +20,37 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Book> books;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Author> authors;
+
     @ManyToMany
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
+
+
+
+    public User() {
+    }
+
+    public void addBookToUser(Book book){
+        if (books == null){
+            books = new ArrayList<>();
+        }
+        books.add(book);
+        book.setUser(this);
+    }
+
+    public void addAuthorToUser(Author author){
+        if (authors == null){
+            authors = new ArrayList<>();
+        }
+        authors.add(author);
+        author.setUser(this);
+    }
 
     public Long getId() {
         return id;
@@ -53,5 +82,22 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }
