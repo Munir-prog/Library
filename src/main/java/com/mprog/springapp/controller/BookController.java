@@ -8,23 +8,36 @@ import com.mprog.springapp.model.Book;
 import com.mprog.springapp.model.User;
 import com.mprog.springapp.service.AuthorService;
 import com.mprog.springapp.service.BookService;
+import com.mprog.springapp.service.ImageService;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 @Controller
+@MultipartConfig(fileSizeThreshold = 1024 * 1024)
 public class BookController {
 
     @Autowired
     private BookService bookService;
+
+    @Autowired
+    private ImageService imageService;
 
     @Autowired
     private AuthorService authorService;
@@ -45,22 +58,30 @@ public class BookController {
         return "books";
     }
 
+//    @RequestMapping(value = "/image-manual-response", method = RequestMethod.GET)
+//    public void getImageAsByteArray(HttpServletResponse response) throws IOException {
+//        InputStream in = ServletContext.getResourceAsStream("/WEB-INF/images/image-example.jpg");
+//        response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+//        IOUtils.copy(in, response.getOutputStream());
+//    }
 
     @GetMapping("/addBook")
     public String add(Model model){
 
         model.addAttribute("book", new Book());
-//        model.addAttribute("author", new Author());
         return "add_book";
     }
 
-    @PostMapping("/books")
-    public String add(@ModelAttribute("book") Book book, HttpServletRequest request){
 
+    @PostMapping("/books")
+    public String add(@ModelAttribute("book") Book book, @RequestParam("bookImage") MultipartFile file, HttpServletRequest request) throws ServletException, IOException {
+
+        User user = getUser();
+        String image = imageService.getImage(file);
         String authorName = request.getParameter("authorName");
         int authorId = authorService.getAuthorIdByName(authorName);
 
-        User user = getUser();
+        book.setImage(image);
         book.setUser(user);
 
         int bookId = bookService.save(book);
@@ -68,6 +89,16 @@ public class BookController {
         bookService.mapBookAndAuthor(bookId, authorId);
 
         return "redirect:/books";
+    }
+
+    @GetMapping("/books/{id}")
+    public String show(@PathVariable("id") int id, Model model){
+        // get book by id and put to model
+
+        Book book = bookService.getById(id);
+        model.addAttribute("book", book);
+
+        return "book";
     }
 
 
@@ -82,3 +113,4 @@ public class BookController {
         return user;
     }
 }
+

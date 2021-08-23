@@ -30,6 +30,7 @@
         <th>Quantity</th>
         <th>Genre</th>
         <th>User</th>
+        <th>Operations</th>
     </tr>
 
     <c:forEach var="book" items="${books}">
@@ -41,10 +42,13 @@
             <td>${book.quantity}</td>
             <td>${book.genre.genre}</td>
             <td>${book.user.username}</td>
+            <td>
+                <a href="/books/${book.id}"><button type="button">view</button></a>
+            </td>
         </tr>
     </c:forEach>
 </table>
 
-<button type="button"><a href="${contextPath}/addBook">Add</a></button>
+<a href="${contextPath}/addBook"><button type="button">Add</button></a>
 </body>
 </html>

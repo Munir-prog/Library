@@ -1,8 +1,8 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://java.sun.com/xml/ns/javaee"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
-	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-         version="2.5">
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
 
     <display-name>Spring Security Application</display-name>
 
@@ -10,6 +10,20 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>/WEB-INF/appconfig-root.xml</param-value>
     </context-param>
+
+<!--    <servlet>-->
+<!--        <servlet-name>StudentRegistrationUsn</servlet-name>-->
+<!--        <servlet-class>com.example.StudentRegistrationUsn</servlet-class>-->
+<!--        <multipart-config>-->
+<!--            <max-file-size>10485760</max-file-size>-->
+<!--            <max-request-size>20971520</max-request-size>-->
+<!--            <file-size-threshold>5242880</file-size-threshold>-->
+<!--        </multipart-config>-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>StudentRegistrationUsn</servlet-name>-->
+<!--        <url-pattern>/university/student/registration</url-pattern>-->
+<!--    </servlet-mapping>-->
 
     <filter>
         <filter-name>springSecurityFilterChain</filter-name>
@@ -34,6 +48,25 @@
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+
+
+
+<!--    <servlet>-->
+<!--        <description/>-->
+<!--        <servlet-name>addbookjsp</servlet-name>-->
+<!--        <jsp-file>/add_book.jsp</jsp-file>-->
+<!--        <multipart-config>-->
+<!--            &lt;!&ndash; enter your values &ndash;&gt;-->
+<!--            <max-file-size>123456</max-file-size>-->
+<!--            <max-request-size>123456</max-request-size>-->
+<!--            <file-size-threshold>123456</file-size-threshold>-->
+<!--        </multipart-config>-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>addbookjsp</servlet-name>-->
+<!--        <url-pattern>/add_book.jsp</url-pattern>-->
+<!--    </servlet-mapping>-->
+
 
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

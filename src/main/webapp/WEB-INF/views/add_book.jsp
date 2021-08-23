@@ -24,11 +24,11 @@
 
 <%--    // реализовать одну форму book а для автора потребуется посмоьреть авторов и написать его имя--%>
 
-    <form:form action="books" modelAttribute="book" method="post">
+    <form:form action="books?${_csrf.parameterName}=${_csrf.token}" modelAttribute="book" enctype="multipart/form-data" method="post" >
         <form:input path="tittle" placeholder="name"/><br>
         <form:input path="publishingName" placeholder="publishing"/><br>
         <form:input path="page" placeholder="page count"/><br>
-        <form:input path="image" placeholder="image path"/><br>
+        <input type="file" name="bookImage" required><br>
 <%--        <form:input path="quantity" placeholder="name"/>--%>
         <form:input path="genre.genre" placeholder="genre"/><br>
         <input type="text" name="authorName" placeholder="author name"><br>
