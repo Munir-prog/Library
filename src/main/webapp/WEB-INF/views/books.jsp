@@ -43,7 +43,8 @@
             <td>${book.user.username}</td>
         </tr>
     </c:forEach>
-    <buton type="button"><a href="${contextPath}/add"></a></buton>
 </table>
+
+<button type="button"><a href="${contextPath}/addBook">Add</a></button>
 </body>
 </html>

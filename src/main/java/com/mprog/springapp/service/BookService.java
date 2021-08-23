@@ -19,6 +19,14 @@ public class BookService {
 
 
     public List<Book> getAll(int id){
-        return bookDao.findAllByName(id);
+        return bookDao.findAllByUserId(id);
+    }
+
+    public int save(Book book) {
+        return bookDao.save(book);
+    }
+
+    public void mapBookAndAuthor(int bookId, int authorId) {
+        bookDao.mapBookAndAuthor(bookId, authorId);
     }
 }

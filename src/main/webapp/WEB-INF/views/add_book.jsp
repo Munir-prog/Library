@@ -1,5 +1,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
@@ -20,18 +21,22 @@
 
 <div class="container">
 
-    <c:if test="${pageContext.request.userPrincipal.name != null}">
-        <form id="logoutForm" method="POST" action="${contextPath}/logout">
-            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        </form>
 
-        <h2>Welcome ${pageContext.request.userPrincipal.name} | <a onclick="document.forms['logoutForm'].submit()">Logout</a>
-        </h2>
+<%--    // реализовать одну форму book а для автора потребуется посмоьреть авторов и написать его имя--%>
 
-        <a href="${contextPath}/books">Books</a><br>
-        <a href="${contextPath}/authors">Authors</a>
+    <form:form action="books" modelAttribute="book" method="post">
+        <form:input path="tittle" placeholder="name"/><br>
+        <form:input path="publishingName" placeholder="publishing"/><br>
+        <form:input path="page" placeholder="page count"/><br>
+        <form:input path="image" placeholder="image path"/><br>
+<%--        <form:input path="quantity" placeholder="name"/>--%>
+        <form:input path="genre.genre" placeholder="genre"/><br>
+        <input type="text" name="authorName" placeholder="author name"><br>
+        <input type="submit" value="OK">
+    </form:form>
+<br>
 
-    </c:if>
+
 
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

@@ -52,6 +52,8 @@ public class User {
         author.setUser(this);
     }
 
+
+
     public Long getId() {
         return id;
     }
@@ -86,6 +88,14 @@ public class User {
 
     public List<Book> getBooks() {
         return books;
+    }
+
+    public List<Author> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(List<Author> authors) {
+        this.authors = authors;
     }
 
     public void setBooks(List<Book> books) {

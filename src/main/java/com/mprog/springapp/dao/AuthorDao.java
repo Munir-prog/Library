@@ -1,8 +1,7 @@
 package com.mprog.springapp.dao;
 
-import com.mprog.springapp.model.Book;
-import com.mprog.springapp.model.Role;
+import com.mprog.springapp.model.Author;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface BookDao extends JpaRepository<Book, Long> {
+public interface AuthorDao extends JpaRepository<Author, Long> {
 }

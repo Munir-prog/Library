@@ -41,4 +41,17 @@ public class AuthorDaoImpl {
 
         currentSession.getTransaction().commit();
     }
+
+    public Author findAuthorByName(String authorName) {
+        SessionFactory sessionFactory = getSessionFactory();
+        Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.beginTransaction();
+        Query<Author> query = currentSession.createQuery("from Author where name = :name", Author.class);
+        query.setParameter("name", authorName);
+        Author author = query.getSingleResult();
+
+        currentSession.getTransaction().commit();
+
+        return author;
+    }
 }

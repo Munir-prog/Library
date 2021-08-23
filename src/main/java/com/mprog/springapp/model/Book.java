@@ -1,6 +1,8 @@
 package com.mprog.springapp.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "book")
@@ -21,6 +23,12 @@ public class Book {
     @Column(name = "quantity")
     private int quantity;
 
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(name = "book_author",
+//            joinColumns = @JoinColumn(name = "book_id"),
+//            inverseJoinColumns = @JoinColumn(name = "author_id"))
+//    private List<Author> authorList;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User user;
@@ -33,6 +41,13 @@ public class Book {
     public Book() {
     }
 
+
+//    public void addAuthorToBook(Author author){
+//        if (authorList == null){
+//            authorList = new ArrayList<>();
+//        }
+//        authorList.add(author);
+//    }
     public int getId() {
         return id;
     }
@@ -64,6 +79,14 @@ public class Book {
     public void setPage(int page) {
         this.page = page;
     }
+
+//    public List<Author> getAuthorList() {
+//        return authorList;
+//    }
+//
+//    public void setAuthorList(List<Author> authorList) {
+//        this.authorList = authorList;
+//    }
 
     public String getImage() {
         return image;

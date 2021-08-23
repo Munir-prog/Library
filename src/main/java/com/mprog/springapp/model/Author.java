@@ -1,7 +1,11 @@
 package com.mprog.springapp.model;
 
+import org.hibernate.boot.model.naming.ImplicitNameSource;
+
 import javax.persistence.*;
 import java.lang.annotation.Target;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "author")
@@ -25,8 +29,23 @@ public class Author {
     @JoinColumn(name = "user_id")
     private User user;
 
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinTable(name = "book_author",
+//    joinColumns = @JoinColumn(name = "author_id"),
+//    inverseJoinColumns = @JoinColumn(name = "book_id"))
+//    private List<Book> bookList;
+//
+
     public Author() {
     }
+
+
+//    public void addBookToAuthor(Book book){
+//        if (bookList == null) {
+//            bookList = new ArrayList<>();
+//        }
+//        bookList.add(book);
+//    }
 
     public int getId() {
         return id;
@@ -75,6 +94,14 @@ public class Author {
     public void setUser(User user) {
         this.user = user;
     }
+//
+//    public List<Book> getBookList() {
+//        return bookList;
+//    }
+//
+//    public void setBookList(List<Book> bookList) {
+//        this.bookList = bookList;
+//    }
 
     @Override
     public String toString() {
