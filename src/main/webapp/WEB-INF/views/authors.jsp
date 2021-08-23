@@ -12,39 +12,35 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Books</title>
+    <title>Authors</title>
     <link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">
 
 </head>
 <body>
-<h2>All Books</h2>
+<h2>All Authors</h2>
 <br>
 
 <table>
 
     <tr>
-        <th>Title</th>
-        <th>Publishing</th>
-        <th>Page Count</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Age</th>
         <th>Image</th>
-        <th>Quantity</th>
-        <th>Genre</th>
         <th>User</th>
     </tr>
 
-    <c:forEach var="book" items="${books}">
+    <c:forEach var="author" items="${authors}">
         <tr>
-            <td>${book.tittle}</td>
-            <td>${book.publishingName}</td>
-            <td>${book.page}</td>
-            <td>${book.image}</td>
-            <td>${book.quantity}</td>
-            <td>${book.genre.genre}</td>
-            <td>${book.user.username}</td>
+            <td>${author.name}</td>
+            <td>${author.surname}</td>
+            <td>${author.age}</td>
+            <td>${author.image}</td>
+            <td>${author.user.username}</td>
         </tr>
     </c:forEach>
 </table>
 
-<button type="button"><a href="${contextPath}/add">Add</a></button>
+<button type="button"><a href="${contextPath}/addAuthor">Add</a></button>
 </body>
 </html>

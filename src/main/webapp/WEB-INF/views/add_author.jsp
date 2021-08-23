@@ -22,27 +22,16 @@
 <div class="container">
 
 
-    // реализовать одну форму book а для автора потребуется посмоьреть авторов и написать его имя
+<%--    // реализовать одну форму book а для автора потребуется посмоьреть авторов и написать его имя--%>
 
-    <form:form action="add" modelAttribute="book" method="post">
-        <form:input path="tittle" placeholder="name"/><br>
-        <form:input path="publishingName" placeholder="publishing"/><br>
-        <form:input path="page" placeholder="page count"/><br>
-        <form:input path="image" placeholder="image path"/><br>
-        <form:input path="authorList" placeholder="image path"/><br>
-<%--        <form:input path="quantity" placeholder="name"/>--%>
-        <form:input path="genre.genre" placeholder="genre"/><br>
-        <input type="submit" value="OK">
-    </form:form>
-<br>
-<br>
-    <form:form action="add" modelAttribute="author" method="post">
+    <form:form action="authors" modelAttribute="author" method="post">
         <form:input path="name" placeholder="name"/><br>
         <form:input path="surname" placeholder="surname"/><br>
         <form:input path="age" placeholder="age"/><br>
         <form:input path="image" placeholder="image path"/><br>
         <input type="submit" value="OK">
     </form:form>
+<br>
 
 
 </div>
