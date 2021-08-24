@@ -101,6 +101,27 @@ public class BookController {
         return "book";
     }
 
+    @GetMapping("/books/{id}/edit")
+    public String edit(Model model, @PathVariable("id") int id){
+        var book = bookService.getById(id);
+        model.addAttribute("book", book);
+        return "edit_book";
+    }
+
+    @PostMapping("/bookEdit/{id}")
+    public String edit(@ModelAttribute("book") Book book, @PathVariable("id") int id, @RequestParam("bookImage") MultipartFile file) throws ServletException, IOException {
+        var user = getUser();
+        String image = imageService.getImage(file);
+        book.setImage(image);
+        book.setUser(user);
+        book.setId(id);
+        bookService.updateBook(book);
+        return "redirect:/books";
+    }
+
+
+
+
 
 
     public  User getUser() {

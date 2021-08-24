@@ -44,6 +44,7 @@
             <td>${book.user.username}</td>
             <td>
                 <a href="/books/${book.id}"><button type="button">view</button></a>
+                <a href="/books/${book.id}/edit"><button type="button">edit</button></a>
             </td>
         </tr>
     </c:forEach>

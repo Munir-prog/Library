@@ -35,6 +35,7 @@ public class AuthorService {
     }
 
     public Author getById(int id) {
-        return authorDaoImpl.getById(id);
+//        return authorDaoImpl.getById(id);
+        return authorDao.findById(id).get();
     }
 }

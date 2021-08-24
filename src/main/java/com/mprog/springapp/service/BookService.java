@@ -34,4 +34,8 @@ public class BookService {
     public Book getById(int id) {
         return bookDao.findById(id).get();
     }
+
+    public void updateBook(Book book) {
+        bookDaoImpl.update(book);
+    }
 }

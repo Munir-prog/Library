@@ -53,9 +53,22 @@ public class BookDaoImpl {
         currentSession.beginTransaction();
         String sql = "INSERT INTO book_author (book_id, author_id) VALUES (" + bookId + ", " + authorId + ")";
         Query query = currentSession.createNativeQuery(sql);
-//        query.setParameter("b_id", bookId);
-//        query.setParameter("a_id", authorId);
         query.executeUpdate();
+
+        currentSession.getTransaction().commit();
+    }
+
+    public void update(Book book) {
+
+        SessionFactory sessionFactory = getSessionFactory();
+        Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.beginTransaction();
+
+//        String sql = "DELETE FROM book WHERE id = " + book.getId();
+//        Query query = currentSession.createNativeQuery(sql);
+//        query.executeUpdate();
+
+        currentSession.saveOrUpdate(book);
 
         currentSession.getTransaction().commit();
     }
