@@ -19,12 +19,13 @@ public class BookService {
     private BookDao bookDao;
 
 
-    public List<Book> getAll(int id){
+    public List<Book> getAll(int id) {
         return bookDaoImpl.findAllByUserId(id);
     }
 
     public int save(Book book) {
-        return bookDaoImpl.save(book);
+        bookDaoImpl.save(book);
+        return bookDaoImpl.getId(book);
     }
 
     public void mapBookAndAuthor(int bookId, int authorId) {
@@ -37,5 +38,10 @@ public class BookService {
 
     public void updateBook(Book book) {
         bookDaoImpl.update(book);
+    }
+
+    public void delete(int id) {
+        bookDao.deleteById(id);
+        bookDaoImpl.deleteMapping(id);
     }
 }

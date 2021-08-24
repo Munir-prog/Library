@@ -38,4 +38,8 @@ public class AuthorService {
 //        return authorDaoImpl.getById(id);
         return authorDao.findById(id).get();
     }
+
+    public void updateAuthor(Author author) {
+        authorDaoImpl.update(author);
+    }
 }

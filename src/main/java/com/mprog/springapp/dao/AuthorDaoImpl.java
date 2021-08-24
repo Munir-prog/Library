@@ -66,4 +66,14 @@ public class AuthorDaoImpl {
 
         return author;
     }
+
+    public void update(Author author) {
+        SessionFactory sessionFactory = getSessionFactory();
+        Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.beginTransaction();
+
+        currentSession.saveOrUpdate(author);
+
+        currentSession.getTransaction().commit();
+    }
 }

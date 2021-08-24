@@ -30,20 +30,14 @@ public class BookDaoImpl {
     }
 
     //Check here for 2 query
-    public int save(Book book) {
+    public void save(Book book) {
         SessionFactory sessionFactory = getSessionFactory();
         Session currentSession = sessionFactory.getCurrentSession();
         currentSession.beginTransaction();
 
         currentSession.save(book);
-
-        Query<Book> query = currentSession.createQuery("from Book where tittle = :tittle", Book.class);
-        query.setParameter("tittle", book.getTittle());
-        Book singleBook = query.getSingleResult();
-
         currentSession.getTransaction().commit();
 
-        return singleBook.getId();
     }
 
     public void mapBookAndAuthor(int bookId, int authorId) {
@@ -64,12 +58,36 @@ public class BookDaoImpl {
         Session currentSession = sessionFactory.getCurrentSession();
         currentSession.beginTransaction();
 
-//        String sql = "DELETE FROM book WHERE id = " + book.getId();
-//        Query query = currentSession.createNativeQuery(sql);
-//        query.executeUpdate();
-
         currentSession.saveOrUpdate(book);
 
         currentSession.getTransaction().commit();
+    }
+
+    public void deleteMapping(int id) {
+
+
+        SessionFactory sessionFactory = getSessionFactory();
+        Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.beginTransaction();
+
+        String sql = "DELETE FROM book_author WHERE book_id = " + id;
+        Query query = currentSession.createNativeQuery(sql);
+        query.executeUpdate();
+
+        currentSession.getTransaction().commit();
+    }
+
+    public int getId(Book book) {
+
+        SessionFactory sessionFactory = getSessionFactory();
+        var currentSession = sessionFactory.getCurrentSession();
+        currentSession.beginTransaction();
+        Query<Book> query = currentSession.createQuery("from Book where tittle = :tittle", Book.class);
+        query.setParameter("tittle", book.getTittle());
+        Book singleBook = query.getSingleResult();
+
+        currentSession.getTransaction().commit();
+
+        return singleBook.getId();
     }
 }

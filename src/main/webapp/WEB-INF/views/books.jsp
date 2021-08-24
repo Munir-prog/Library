@@ -45,6 +45,7 @@
             <td>
                 <a href="/books/${book.id}"><button type="button">view</button></a>
                 <a href="/books/${book.id}/edit"><button type="button">edit</button></a>
+                <a href="/books/${book.id}/delete"><button type="button">delete</button></a>
             </td>
         </tr>
     </c:forEach>

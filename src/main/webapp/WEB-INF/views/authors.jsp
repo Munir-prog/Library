@@ -40,6 +40,7 @@
             <td>${author.user.username}</td>
             <td>
                 <a href="/authors/${author.id}"><button type="button">view</button></a>
+                <a href="/authors/${author.id}/edit"><button type="button">edit</button></a>
             </td>
         </tr>
     </c:forEach>

@@ -108,6 +108,12 @@ public class BookController {
         return "edit_book";
     }
 
+    @GetMapping("/books/{id}/delete")
+    public String edit(@PathVariable("id") int id){
+        bookService.delete(id);
+        return "redirect:/books";
+    }
+
     @PostMapping("/bookEdit/{id}")
     public String edit(@ModelAttribute("book") Book book, @PathVariable("id") int id, @RequestParam("bookImage") MultipartFile file) throws ServletException, IOException {
         var user = getUser();

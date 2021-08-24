@@ -69,6 +69,24 @@ public class AuthorController {
         return "redirect:/authors";
     }
 
+    @GetMapping("/authors/{id}/edit")
+    public String edit(Model model, @PathVariable("id") int id){
+        var author = authorService.getById(id);
+        model.addAttribute("author", author);
+        return "edit_author";
+    }
+
+    @PostMapping("/authorEdit/{id}")
+    public String edit(@ModelAttribute("author") Author author, @PathVariable("id") int id, @RequestParam("authorImage") MultipartFile file) throws ServletException, IOException {
+        var user = getUser();
+        String image = imageService.getImage(file);
+        author.setImage(image);
+        author.setUser(user);
+        author.setId(id);
+        authorService.updateAuthor(author);
+        return "redirect:/authors";
+    }
+
 
     public User getUser() {
         String username = "";

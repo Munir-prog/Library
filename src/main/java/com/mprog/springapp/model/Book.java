@@ -29,7 +29,7 @@ public class Book {
 //            inverseJoinColumns = @JoinColumn(name = "author_id"))
 //    private List<Author> authorList;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "user_id")
     private User user;
 
