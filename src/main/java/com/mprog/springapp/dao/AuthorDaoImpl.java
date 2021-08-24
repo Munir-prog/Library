@@ -54,4 +54,16 @@ public class AuthorDaoImpl {
 
         return author;
     }
+
+    public Author getById(int id) {
+        SessionFactory sessionFactory = getSessionFactory();
+        Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.beginTransaction();
+
+        var author = currentSession.get(Author.class, id);
+
+        currentSession.getTransaction().commit();
+
+        return author;
+    }
 }

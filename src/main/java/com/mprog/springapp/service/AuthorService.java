@@ -7,6 +7,7 @@ import com.mprog.springapp.model.Author;
 import com.mprog.springapp.model.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -31,5 +32,9 @@ public class AuthorService {
     public int getAuthorIdByName(String authorName) {
         Author author = authorDaoImpl.findAuthorByName(authorName);
         return author.getId();
+    }
+
+    public Author getById(int id) {
+        return authorDaoImpl.getById(id);
     }
 }

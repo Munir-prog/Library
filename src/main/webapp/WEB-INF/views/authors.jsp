@@ -28,6 +28,7 @@
         <th>Age</th>
         <th>Image</th>
         <th>User</th>
+        <th>Operations</th>
     </tr>
 
     <c:forEach var="author" items="${authors}">
@@ -37,6 +38,9 @@
             <td>${author.age}</td>
             <td>${author.image}</td>
             <td>${author.user.username}</td>
+            <td>
+                <a href="/authors/${author.id}"><button type="button">view</button></a>
+            </td>
         </tr>
     </c:forEach>
 </table>
