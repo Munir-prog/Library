@@ -17,7 +17,7 @@ import java.nio.file.StandardOpenOption;
 public class ImageService {
 
     private static final String IMAGE_FOLDER = "library/";
-    private final String basePath = "/home/munir/IdeaProjects/springProjects/library2/src/main/webapp/WEB-INF/images";
+    private final String basePath = "/home/munir/IdeaProjects/springProjects/library2/src/main/webapp/resources/images";
 
     public String getImage(MultipartFile file) throws ServletException, IOException {
 
