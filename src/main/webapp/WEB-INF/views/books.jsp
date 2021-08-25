@@ -1,7 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-
 <%--
   Created by IntelliJ IDEA.
   User: munir
@@ -17,40 +16,60 @@
 
 </head>
 <body>
-<h2>All Books</h2>
+<div style="display: flex; justify-content: center; background-color: #1b6d85">
+    <h2>All Books</h2>
+    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+    <h2><a href="${contextPath}/addBook">
+        <button type="button">Add new book</button>
+    </a></h2>
+</div>
 <br>
 
-<table>
 
-    <tr>
-        <th>Title</th>
-        <th>Publishing</th>
-        <th>Page Count</th>
-        <th>Image</th>
-        <th>Quantity</th>
-        <th>Genre</th>
-        <th>User</th>
-        <th>Operations</th>
-    </tr>
+<div style="display: flex;  flex-direction: column; align-items: center; width: 100%">
+    <c:forEach var="book" items="${pages}">
+        <div style="height: 300px; width: 650px; border: 3px solid #1b6d85; border-radius: 30px; margin-bottom: 40px;
+        display: flex; flex-direction: column; align-items: center; justify-content: center">
+            <div style="width: 50%; display: flex; flex-direction: column; align-items: center;">
+                <h4><span>Book name: ${book.tittle}</span></h4><br>
+                <h4><span>Publishing: ${book.publishingName}</span></h4><br>
+                <h4><span>Genre: ${book.genre.genre}</span></h4><br>
+            </div>
+            <div style="width: 50%; display: flex; flex-direction: row; justify-content: space-around;">
+                <a href="/books/${book.id}">
+                    <button type="button" style="width: 75px; height: 30px">view</button>
+                </a>
+                <a href="/books/${book.id}/edit">
+                    <button type="button" style="width: 75px; height: 30px">edit</button>
+                </a>
+                <a href="/books/${book.id}/delete">
+                    <button type="button" style="width: 75px; height: 30px">delete</button>
+                </a>
+            </div>
+        </div>
 
-    <c:forEach var="book" items="${books}">
-        <tr>
-            <td>${book.tittle}</td>
-            <td>${book.publishingName}</td>
-            <td>${book.page}</td>
-            <td>${book.image}</td>
-            <td>${book.quantity}</td>
-            <td>${book.genre.genre}</td>
-            <td>${book.user.username}</td>
-            <td>
-                <a href="/books/${book.id}"><button type="button">view</button></a>
-                <a href="/books/${book.id}/edit"><button type="button">edit</button></a>
-                <a href="/books/${book.id}/delete"><button type="button">delete</button></a>
-            </td>
-        </tr>
     </c:forEach>
-</table>
-
-<a href="${contextPath}/addBook"><button type="button">Add</button></a>
+</div>
+<nav aria-label="...">
+    <ul class="pagination">
+        <li class="page-item disabled">
+            <a class="page-link" href="#">Pages</a>
+        </li>
+        <c:forEach varStatus="p" begin="1" end="${totalPages}">
+            <c:choose>
+                <c:when test="${p.index == number}">
+                    <li class="page-item active">
+                        <a class="page-link" href="#">${p.index}</a>
+                    </li>
+                </c:when>
+                <c:otherwise>
+                    <li class="page-item">
+                        <a class="page-link" href="${pageContext.request.contextPath}/books?page=${p.index}">${p.index}</a>
+                    </li>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
+    </ul>
+</nav>
 </body>
 </html>

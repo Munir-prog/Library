@@ -42,4 +42,12 @@ public class AuthorService {
     public void updateAuthor(Author author) {
         authorDaoImpl.update(author);
     }
+
+    public void delete(int id) {
+        authorDao.deleteById(id);
+    }
+
+    public boolean hasNotBook(int id) {
+        return authorDaoImpl.getMapping(id);
+    }
 }

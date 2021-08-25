@@ -88,6 +88,14 @@ public class AuthorController {
     }
 
 
+    @GetMapping("/authors/{id}/delete")
+    public String delete(@PathVariable("id") int id){
+        if (authorService.hasNotBook(id)){
+            authorService.delete(id);
+        }
+        return "redirect:/authors";
+    }
+
     public User getUser() {
         String username = "";
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();

@@ -6,6 +6,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
+import org.springframework.data.domain.Pageable;
 
 import java.io.Serializable;
 import java.util.List;
@@ -70,7 +71,7 @@ public class BookDaoImpl {
         Session currentSession = sessionFactory.getCurrentSession();
         currentSession.beginTransaction();
 
-        String sql = "DELETE FROM book_author WHERE book_id = " + id;
+        String sql = "DELETE FROM book_author WHERE id = " + id;
         Query query = currentSession.createNativeQuery(sql);
         query.executeUpdate();
 

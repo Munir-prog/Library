@@ -76,4 +76,22 @@ public class AuthorDaoImpl {
 
         currentSession.getTransaction().commit();
     }
+
+    public boolean getMapping(int id) {
+
+        SessionFactory sessionFactory = getSessionFactory();
+        Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.beginTransaction();
+
+        String sql = "SELECT * FROM book_author WHERE author_id = " + id;
+        Query query = currentSession.createNativeQuery(sql);
+        var resultList = query.getResultList();
+        if (resultList.size() == 0){
+            return true;
+        }
+
+
+        currentSession.getTransaction().commit();
+        return false;
+    }
 }
