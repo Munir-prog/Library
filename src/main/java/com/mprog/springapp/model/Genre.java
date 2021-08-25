@@ -15,7 +15,8 @@ public class Genre {
     @Column(name = "genre_name")
     private String genre;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "genre")
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "genre_id")
     private List<Book> books;
 
     public Genre() {
@@ -26,7 +27,6 @@ public class Genre {
             books = new ArrayList<>();
         }
         books.add(book);
-        book.setGenre(this);
     }
 
 

@@ -21,6 +21,10 @@
     <h2>All Authors</h2>
     &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
     <h2><a href="${contextPath}/addAuthor"><button type="button">Add new author</button></a></h2>
+    &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+    <h2><a href="${contextPath}/welcome">
+        <button type="button">Welcome page</button>
+    </a></h2>
 </div>
 <br>
 

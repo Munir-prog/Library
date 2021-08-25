@@ -17,10 +17,10 @@
 </head>
 <body>
 <div style="display: flex; justify-content: center; background-color: #1b6d85">
-    <h2>All Books</h2>
+    <h2>All Genres</h2>
     &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
-    <h2><a href="${contextPath}/addBook">
-        <button type="button">Add new book</button>
+    <h2><a href="${contextPath}/addGenre">
+        <button type="button">Add new Genre</button>
     </a></h2>
     &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
     <h2><a href="${contextPath}/welcome">
@@ -35,18 +35,16 @@
         <div style="height: 300px; width: 650px; border: 3px solid #1b6d85; border-radius: 30px; margin-bottom: 40px;
         display: flex; flex-direction: column; align-items: center; justify-content: center">
             <div style="width: 50%; display: flex; flex-direction: column; align-items: center;">
-                <h4><span>Book name: ${book.tittle}</span></h4><br>
-                <h4><span>Publishing: ${book.publishingName}</span></h4><br>
-                <h4><span>Genre: ${book.genre.genre}</span></h4><br>
+                <h4><span>Genre name: ${book.genre}</span></h4><br>
             </div>
             <div style="width: 50%; display: flex; flex-direction: row; justify-content: space-around;">
-                <a href="/books/${book.id}">
+                <a href="/genres/${book.id}">
                     <button type="button" style="width: 75px; height: 30px">view</button>
                 </a>
-                <a href="/books/${book.id}/edit">
+                <a href="/genres/${book.id}/edit">
                     <button type="button" style="width: 75px; height: 30px">edit</button>
                 </a>
-                <a href="/books/${book.id}/delete">
+                <a href="/genres/${book.id}/delete">
                     <button type="button" style="width: 75px; height: 30px">delete</button>
                 </a>
             </div>
@@ -68,7 +66,7 @@
                 </c:when>
                 <c:otherwise>
                     <li class="page-item">
-                        <a class="page-link" href="${pageContext.request.contextPath}/books?page=${p.index - 1}">${p.index}</a>
+                        <a class="page-link" href="${pageContext.request.contextPath}/genres?page=${p.index - 1}">${p.index}</a>
                     </li>
                 </c:otherwise>
             </c:choose>
