@@ -68,6 +68,28 @@
     </c:forEach>
 </div>
 
+<nav aria-label="...">
+    <ul class="pagination">
+        <li class="page-item disabled">
+            <a class="page-link" href="#">Pages</a>
+        </li>
+        <c:forEach varStatus="p" begin="1" end="${totalPages}">
+            <c:choose>
+                <c:when test="${(p.index - 1) == number}">
+                    <li class="page-item active">
+                        <a class="page-link" href="#">${p.index}</a>
+                    </li>
+                </c:when>
+                <c:otherwise>
+                    <li class="page-item">
+                        <a class="page-link" href="${pageContext.request.contextPath}/authors?page=${p.index - 1}">${p.index}</a>
+                    </li>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
+    </ul>
+</nav>
+
 
 </body>
 </html>

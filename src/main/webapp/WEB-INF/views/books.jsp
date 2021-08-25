@@ -57,14 +57,14 @@
         </li>
         <c:forEach varStatus="p" begin="1" end="${totalPages}">
             <c:choose>
-                <c:when test="${p.index == number}">
+                <c:when test="${(p.index - 1) == number}">
                     <li class="page-item active">
                         <a class="page-link" href="#">${p.index}</a>
                     </li>
                 </c:when>
                 <c:otherwise>
                     <li class="page-item">
-                        <a class="page-link" href="${pageContext.request.contextPath}/books?page=${p.index}">${p.index}</a>
+                        <a class="page-link" href="${pageContext.request.contextPath}/books?page=${p.index - 1}">${p.index}</a>
                     </li>
                 </c:otherwise>
             </c:choose>

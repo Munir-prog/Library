@@ -1,5 +1,6 @@
 package com.mprog.springapp.controller;
 
+import com.mprog.springapp.dao.AuthorRepository;
 import com.mprog.springapp.dao.UserDao;
 import com.mprog.springapp.model.Author;
 import com.mprog.springapp.model.Book;
@@ -7,6 +8,8 @@ import com.mprog.springapp.model.User;
 import com.mprog.springapp.service.AuthorService;
 import com.mprog.springapp.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -32,14 +35,36 @@ public class AuthorController {
     @Autowired
     private UserDao userDao;
 
+    @Autowired
+    private AuthorRepository authorRepository;
 
+
+//    @GetMapping("/authors")
+//    public String allBooks(Model model){
+//        User user = getUser();
+//
+//        List<Author> authors = authorService.getAll(user.getId().intValue());
+//        model.addAttribute("authors", authors);
+//
+//        return "authors";
+//    }
     @GetMapping("/authors")
-    public String allBooks(Model model){
+    public String allAuthors(Model model,
+                             @RequestParam(value = "page", required = false) Integer pageIndex,
+                             @RequestParam(value = "size", required = false) Integer pageSize){
+
         User user = getUser();
 
-        List<Author> authors = authorService.getAll(user.getId().intValue());
-        model.addAttribute("authors", authors);
-
+        if (pageIndex == null){
+            pageIndex = 0;
+        }
+        if (pageSize == null){
+            pageSize = 3;
+        }
+        var pageAuthor = authorRepository.findByUserId(user.getId(), PageRequest.of(pageIndex, pageSize));
+        model.addAttribute("authors", pageAuthor.getContent());
+        model.addAttribute("totalPages", (long) pageAuthor.getTotalPages());
+        model.addAttribute("number", (long) pageAuthor.getNumber());
         return "authors";
     }
 

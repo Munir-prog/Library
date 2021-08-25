@@ -70,26 +70,22 @@ public class BookController {
 
 
     @GetMapping("/books")
-    public String allBooks(Model model, @RequestParam(value = "page", required = false) Integer pageIndex,
+    public String allBooks(Model model,
+                           @RequestParam(value = "page", required = false) Integer pageIndex,
                            @RequestParam(value = "size", required = false) Integer pageSize) {
         User user = getUser();
 
-        if (pageIndex == null){
-            pageIndex = 1;
+        if (pageIndex == null) {
+            pageIndex = 0;
         }
-        if (pageSize == null){
+        if (pageSize == null) {
             pageSize = 3;
         }
-            var pageBook = bookRepository.findByUserId(user.getId(), PageRequest.of(pageIndex, pageSize));
-            model.addAttribute("pages", pageBook.getContent());
-            model.addAttribute("totalPages", (long) pageBook.getTotalPages());
-            model.addAttribute("number", (long) pageBook.getNumber());
-//        } else {
-//            List<Book> pageBook = bookService.getAll(user.getId().intValue());
-//            model.addAttribute("pages", pageBook);
-//        }
 
-//        pageBo
+        var pageBook = bookRepository.findByUserId(user.getId(), PageRequest.of(pageIndex, pageSize));
+        model.addAttribute("pages", pageBook.getContent());
+        model.addAttribute("totalPages", (long) pageBook.getTotalPages());
+        model.addAttribute("number", (long) pageBook.getNumber());
         return "books";
     }
 
