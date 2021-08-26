@@ -2,9 +2,11 @@ package com.mprog.springapp.service;
 
 import com.mprog.springapp.dao.BookDao;
 import com.mprog.springapp.dao.BookDaoImpl;
+import com.mprog.springapp.dao.BookRepository;
 import com.mprog.springapp.model.Book;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,9 @@ public class BookService {
 
     @Autowired
     private BookDao bookDao;
+
+    @Autowired
+    private BookRepository bookRepository;
 
 
     public List<Book> getAll(int id) {
@@ -45,5 +50,9 @@ public class BookService {
     public void delete(int id) {
         bookDao.deleteById(id);
         bookDaoImpl.deleteMapping(id);
+    }
+
+    public Page<Book> findByUserId(Long id, PageRequest of) {
+        return bookRepository.findByUserId(id, of);
     }
 }

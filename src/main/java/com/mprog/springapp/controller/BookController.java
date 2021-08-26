@@ -43,9 +43,6 @@ public class BookController {
     private BookService bookService;
 
     @Autowired
-    private BookRepository bookRepository;
-
-    @Autowired
     private ImageService imageService;
 
     @Autowired
@@ -53,9 +50,6 @@ public class BookController {
 
     @Autowired
     private UserDao userDao;
-
-    @Autowired
-    private BookDao bookDao;
 
 
     @GetMapping("/books")
@@ -71,19 +65,12 @@ public class BookController {
             pageSize = 3;
         }
 
-        var pageBook = bookRepository.findByUserId(user.getId(), PageRequest.of(pageIndex, pageSize));
+        Page<Book> pageBook = bookService.findByUserId(user.getId(), PageRequest.of(pageIndex, pageSize));
         model.addAttribute("pages", pageBook.getContent());
         model.addAttribute("totalPages", (long) pageBook.getTotalPages());
         model.addAttribute("number", (long) pageBook.getNumber());
         return "books";
     }
-
-//    @RequestMapping(value = "/image-manual-response", method = RequestMethod.GET)
-//    public void getImageAsByteArray(HttpServletResponse response) throws IOException {
-//        InputStream in = ServletContext.getResourceAsStream("/WEB-INF/images/image-example.jpg");
-//        response.setContentType(MediaType.IMAGE_JPEG_VALUE);
-//        IOUtils.copy(in, response.getOutputStream());
-//    }
 
     @GetMapping("/addBook")
     public String add(Model model) {
