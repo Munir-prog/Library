@@ -40,6 +40,8 @@
     </bean>
     <bean id="authorDaoImpl" class="com.mprog.springapp.dao.AuthorDaoImpl">
     </bean>
+    <bean id="genreDaoImpl" class="com.mprog.springapp.dao.GenreDaoImpl">
+    </bean>
 
     <tx:annotation-driven/>
 

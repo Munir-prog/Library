@@ -114,9 +114,11 @@ public class AuthorController {
 
 
     @GetMapping("/authors/{id}/delete")
-    public String delete(@PathVariable("id") int id){
+    public String delete(@PathVariable("id") int id, Model model){
         if (authorService.hasNotBook(id)){
             authorService.delete(id);
+        } else {
+            model.addAttribute("error", "Can't delete author.");
         }
         return "redirect:/authors";
     }

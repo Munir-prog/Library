@@ -6,16 +6,15 @@ import com.mprog.springapp.dao.UserDao;
 import com.mprog.springapp.model.Book;
 import com.mprog.springapp.model.Genre;
 import com.mprog.springapp.model.User;
+import com.mprog.springapp.service.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletException;
@@ -29,10 +28,8 @@ public class GenreController {
     private UserDao userDao;
 
     @Autowired
-    private GenreDao genreDao;
+    private GenreService genreService;
 
-    @Autowired
-    private GenreRepository genreRepository;
 
     @GetMapping("/genres")
     public String genres(Model model,
@@ -46,10 +43,10 @@ public class GenreController {
             pageSize = 3;
         }
 
-        var genrePage = genreRepository.findAll(PageRequest.of(pageIndex, pageSize));
+        Page<Genre> genrePage = genreService.findAll(PageRequest.of(pageIndex, pageSize));
         model.addAttribute("pages", genrePage.getContent());
-        model.addAttribute("totalPages", (long) genrePage.getTotalPages());
-        model.addAttribute("number", (long) genrePage.getNumber());
+        model.addAttribute("totalPages", genrePage.getTotalPages());
+        model.addAttribute("number", genrePage.getNumber());
         return "genres";
     }
 
@@ -63,9 +60,39 @@ public class GenreController {
     @PostMapping("/genres")
     public String add(@ModelAttribute("genre") Genre genre) throws ServletException, IOException {
 
-        genreDao.save(genre);
+        genreService.save(genre);
         return "redirect:/genres";
     }
+
+    @GetMapping("/genres/{id}")
+    public String show(@PathVariable("id") int id, Model model) {
+
+        Genre genre = genreService.findById(id);
+        model.addAttribute("genre", genre);
+
+        return "genre";
+    }
+
+    @GetMapping("/genres/{id}/edit")
+    public String edit(Model model, @PathVariable("id") int id) {
+        var genre = genreService.findById(id);
+        model.addAttribute("genre", genre);
+        return "edit_genre";
+    }
+
+    @PostMapping("/genreEdit/{id}")
+    public String edit(@ModelAttribute("genre") Genre genre, @PathVariable("id") int id) throws ServletException, IOException {
+
+        genreService.updateGenre(genre);
+        return "redirect:/genres";
+    }
+
+    @GetMapping("/genres/{id}/delete")
+    public String delete(@PathVariable("id") int id) {
+        genreService.delete(id);
+        return "redirect:/genres";
+    }
+
 
 
     public User getUser() {

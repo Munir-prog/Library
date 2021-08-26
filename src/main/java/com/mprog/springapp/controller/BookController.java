@@ -57,17 +57,6 @@ public class BookController {
     @Autowired
     private BookDao bookDao;
 
-//    @GetMapping("/books")
-//    public String allBooks(Model model){
-//        User user = getUser();
-//
-//
-//        List<Book> book = bookService.getAll(user.getId().intValue());
-//        model.addAttribute("books", book);
-//
-//        return "books";
-//    }
-
 
     @GetMapping("/books")
     public String allBooks(Model model,
@@ -124,7 +113,6 @@ public class BookController {
 
     @GetMapping("/books/{id}")
     public String show(@PathVariable("id") int id, Model model) {
-        // get book by id and put to model
 
         Book book = bookService.getById(id);
         model.addAttribute("book", book);
@@ -139,12 +127,6 @@ public class BookController {
         return "edit_book";
     }
 
-    @GetMapping("/books/{id}/delete")
-    public String delete(@PathVariable("id") int id) {
-        bookService.delete(id);
-        return "redirect:/books";
-    }
-
     @PostMapping("/bookEdit/{id}")
     public String edit(@ModelAttribute("book") Book book, @PathVariable("id") int id, @RequestParam("bookImage") MultipartFile file) throws ServletException, IOException {
         var user = getUser();
@@ -153,6 +135,12 @@ public class BookController {
         book.setUser(user);
         book.setId(id);
         bookService.updateBook(book);
+        return "redirect:/books";
+    }
+
+    @GetMapping("/books/{id}/delete")
+    public String delete(@PathVariable("id") int id) {
+        bookService.delete(id);
         return "redirect:/books";
     }
 

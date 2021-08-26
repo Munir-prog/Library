@@ -27,33 +27,6 @@
     </a></h2>
 </div>
 <br>
-
-<%--<table>--%>
-
-<%--    <tr>--%>
-<%--        <th>Name</th>--%>
-<%--        <th>Surname</th>--%>
-<%--        <th>Age</th>--%>
-<%--        <th>Image</th>--%>
-<%--        <th>User</th>--%>
-<%--        <th>Operations</th>--%>
-<%--    </tr>--%>
-
-<%--    <c:forEach var="author" items="${authors}">--%>
-<%--        <tr>--%>
-<%--            <td>${author.name}</td>--%>
-<%--            <td>${author.surname}</td>--%>
-<%--            <td>${author.age}</td>--%>
-<%--            <td>${author.image}</td>--%>
-<%--            <td>${author.user.username}</td>--%>
-<%--            <td>--%>
-<%--                <a href="/authors/${author.id}"><button type="button">view</button></a>--%>
-<%--                <a href="/authors/${author.id}/edit"><button type="button">edit</button></a>--%>
-<%--                <a href="/authors/${author.id}/delete"><button type="button">delete</button></a>--%>
-<%--            </td>--%>
-<%--        </tr>--%>
-<%--    </c:forEach>--%>
-
 <div style="display: flex;  flex-direction: column; align-items: center; width: 100%">
     <c:forEach var="author" items="${authors}">
         <div style="height: 300px; width: 650px; border: 3px solid #1b6d85; border-radius: 30px; margin-bottom: 40px;
